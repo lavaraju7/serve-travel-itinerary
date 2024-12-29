@@ -1,0 +1,31 @@
+{
+  "name": "serve-travel-itinerary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon run index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lavaraju7/serve-travel-itinerary.git"
+  },
+  "author": "lavaraju",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lavaraju7/serve-travel-itinerary/issues"
+  },
+  "homepage": "https://github.com/lavaraju7/serve-travel-itinerary#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.19.2",
+    "helmet": "^8.0.0",
+    "joi": "^17.13.3",
+    "mongoose": "^8.6.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.4"
+  }
+}
