@@ -35,6 +35,18 @@ class ItineraryController {
       res.status(400).json({ success: false, message: err.message });
     }
   }
+
+  async getItineraries(req, res) {
+    console.log(req);
+    try {
+      const data = await itineraryService.getItineraries();
+      res
+        .status(201)
+        .json({ success: true, message: "Itineraries fetched", data });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
 }
 
 module.exports = new ItineraryController();

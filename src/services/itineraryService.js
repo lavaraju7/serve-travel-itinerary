@@ -1,24 +1,32 @@
-const itineraryRepository = require('../repositories/itineraryRepository');
+const itineraryRepository = require("../repositories/itineraryRepository");
 
 class ItineraryService {
   async createItinerary(itinerary) {
-    const existingHero = await itineraryRepository.getItineraryWithId(itinerary.id);
+    const existingHero = await itineraryRepository.getItineraryWithId(
+      itinerary.id
+    );
     if (existingHero) {
-      throw new Error('Super Hero already exists.');
+      throw new Error("Super Hero already exists.");
     }
     return await itineraryRepository.createItinerary(itinerary);
   }
 
   async updateItinerary(itinerary) {
-    const existingHero = await itineraryRepository.getItineraryWithId(itinerary.id);
+    const existingHero = await itineraryRepository.getItineraryWithId(
+      itinerary.id
+    );
     if (!existingHero) {
-      throw new Error('Super Hero data not available in the database');
+      throw new Error("Super Hero data not available in the database");
     }
-    return await itineraryRepository.updateItinerary(itinerary.id,itinerary);
+    return await itineraryRepository.updateItinerary(itinerary.id, itinerary);
   }
 
   async getItineraryById(id) {
     return await itineraryRepository.getItineraryWithId(id);
+  }
+
+  async getItineraries() {
+    return await itineraryRepository.getItineraries();
   }
 }
 
