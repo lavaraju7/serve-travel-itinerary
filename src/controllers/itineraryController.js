@@ -37,12 +37,87 @@ class ItineraryController {
   }
 
   async getItineraries(req, res) {
-    console.log(req);
     try {
       const data = await itineraryService.getItineraries();
       res
-        .status(201)
+        .status(200)
         .json({ success: true, message: "Itineraries fetched", data });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
+
+  async deleteItinerary(req, res) {
+    try {
+      await itineraryService.deleteItinerary(req.params.id);
+      res
+        .status(200)
+        .json({ success: true, message: "Itinerary deleted successfully" });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
+
+  async searchItineraries(req, res) {
+    try {
+      const { query, startDate, endDate, location } = req.query;
+      const filters = {
+        query,
+        startDate,
+        endDate,
+        location,
+      };
+      const data = await itineraryService.searchItineraries(filters);
+      res.status(200).json({ success: true, data });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
+
+  async addActivity(req, res) {
+    try {
+      const { id } = req.params;
+      const activityData = req.body;
+      const updatedItinerary = await itineraryService.addActivity(
+        id,
+        activityData
+      );
+      res.status(201).json({
+        success: true,
+        message: "Activity added successfully",
+        data: updatedItinerary,
+      });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
+
+  async updateActivity(req, res) {
+    try {
+      const { id, activityId } = req.params;
+      const activityData = req.body;
+      const updatedItinerary = await itineraryService.updateActivity(
+        id,
+        activityId,
+        activityData
+      );
+      res.status(200).json({
+        success: true,
+        message: "Activity updated successfully",
+        data: updatedItinerary,
+      });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
+
+  async removeActivity(req, res) {
+    try {
+      const { id, activityId } = req.params;
+      await itineraryService.removeActivity(id, activityId);
+      res
+        .status(200)
+        .json({ success: true, message: "Activity removed successfully" });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });
     }
